@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 // 数据类型
 // 	基础类型
@@ -65,12 +68,45 @@ func main() {
 	var a = 1
 	var b = 2
 
-	// 交换两个值
+	// 1. 交换两个值
+
 	a, b = b, a
 
 	fmt.Println("a, b ==>", a, b) // 2, 1
 
 	fmt.Println("----------------分割线---111-----------------")
 
+	// 2. 打印默认零值
+
 	defaultZero()
+
+	// 3. 除法
+	// 当两个数字都是整数，相除后会得到 一个整数，去掉了小数部分
+
+	res1 := 2 / 3
+
+	fmt.Println("2 / 3 ==>", res1) // 0
+
+	// 4. a++ 只能单独使用,不能赋值给其它使用。
+
+	res1++
+	// res2 := res1++ // 不符合语法
+
+	fmt.Println("res1 ==>", res1) // 1
+
+	// 5. 浮点数相除
+
+	var f1 float64 = 100
+	f2 := (f1 - 32) / 1.8 // 浮点数 减 整数 等于 浮点数
+
+	fmt.Printf("f2 ==> %.2f \n", f2) // 37.78
+
+	// 6. 字符串重复
+
+	for i := 1; i < 4; i++ {
+		fmt.Println(strings.Repeat("*", i))
+		// *
+		// **
+		// ***
+	}
 }
