@@ -7,7 +7,7 @@ import "fmt"
 // 使用 type 和 struct 关键字来自定义结构体。
 
 type person1_1 struct {
-	name string
+	name string // 首字母大写，表示该字段是导出的，可以在包外访问；首字母小写，表示该字段是未导出的，只能在包内访问。
 	age  int
 	sex  string
 }
@@ -91,4 +91,16 @@ func main() {
 	}
 
 	fmt.Printf("p6: %#v, type: %T \n", p6, p6) // p6: main.person1_1{name:"sky6", age:40, sex:"男"}, type: main.person1_1
+
+	// 7. 方法七，使用匿名结构体。
+
+	p7 := struct {
+		name string
+		age  int
+	}{
+		name: "blue7",
+		age:  40,
+	}
+
+	fmt.Printf("p7: %#v, type: %T \n", p7, p7) // p7: struct { name string; age int }{name:"blue7", age:40}, type: struct { name string; age int }
 }

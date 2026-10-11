@@ -23,24 +23,29 @@ import (
 //  9. defer 语句可以在函数中使用 panic 函数来触发异常，从而实现一些特定的功能，比如错误处理、日志记录等。
 //  10. defer 语句中的变量，在 defer 声明时就已经确定了其值，而不是在 defer 执行时才确定。
 
-func fn3_1() {
+// 抛错方式
+
+// fmt.Errorf(): 创建格式错误，性能略差。可以 使用 %w 来包装原始错误，便于后续的错误链处理。
+// errors.New(): 创建固定文本错误，性能略好。方便调用方用 error.Is() 来判断错误类型。
+
+func fn2_1() {
 	defer func() {
 		err := recover()
 
 		if err != nil {
-			fmt.Printf("fn3_1 recover err: %v, type: %T \n", err, err) // fn3_1 recover err: fn3_1 panic, type: string
+			fmt.Printf("fn2_1 recover err: %v, type: %T \n", err, err) // fn2_1 recover err: fn2_1 panic, type: string
 		}
 	}()
 
-	panic("fn3_1 panic")
+	panic("fn2_1 panic")
 }
 
-func fn3_2(a, b int) int {
+func fn2_2(a, b int) int {
 	defer func() {
 		err := recover()
 
 		if err != nil {
-			fmt.Printf("fn3_2 recover err: %v, type: %T \n", err, err) // fn3_2 recover err: runtime error: integer divide by zero, type: runtime.errorString
+			fmt.Printf("fn2_2 recover err: %v, type: %T \n", err, err) // fn2_2 recover err: runtime error: integer divide by zero, type: runtime.errorString
 		}
 	}()
 
@@ -48,46 +53,48 @@ func fn3_2(a, b int) int {
 }
 
 // 模拟读取文件失败
-func fn3_3(fileName string) error {
+func fn2_3(fileName string) error {
 	if fileName == "main.go" {
 		return nil
 	}
 
-	return errors.New("fn3_3 read file failed")
+	// return fmt.Errorf("fn2_3 read file failed")
+
+	return errors.New("fn2_3 read file failed")
 }
 
-func fn3_4() {
+func fn2_4() {
 	defer func() {
 		err := recover()
 
 		if err != nil {
-			fmt.Println("fn3_4 recover err ==>", err) // fn3_4 recover err ==> fn3_3 read file failed
+			fmt.Println("fn2_4 recover err ==>", err) // fn2_4 recover err ==> fn2_3 read file failed
 		}
 	}()
 
-	err1 := fn3_3("test.go")
+	err1 := fn2_3("test.go")
 
 	if err1 == nil {
-		fmt.Println("fn3_4 read file success")
+		fmt.Println("fn2_4 read file success")
 	} else {
-		fmt.Println("fn3_4 read file failed, err1 ==>", err1) // fn3_4 read file failed, err1 ==> fn3_3 read file failed
+		fmt.Println("fn2_4 read file failed, err1 ==>", err1) // fn2_4 read file failed, err1 ==> fn2_3 read file failed
 		panic(err1)                                           // 把异常信息抛出，交给 defer 中的 recover 来捕获。
 	}
 
 	// 因为上边抛出了 panic 所以后边的内容不再执行。
 
-	err2 := fn3_3("main.go")
+	err2 := fn2_3("main.go")
 
 	if err2 == nil {
-		fmt.Println("fn3_4 read file success")
+		fmt.Println("fn2_4 read file success")
 	} else {
-		fmt.Println("fn3_4 read file failed, err2 ==>", err2)
+		fmt.Println("fn2_4 read file failed, err2 ==>", err2)
 		panic(err2)
 	}
 }
 
-// 打印：九九乘法表
-func fn3_5(a int) (bool, error) {
+// 打印: 九九乘法表
+func fn2_5(a int) (bool, error) {
 	if a != 9 {
 		// 业务级别抛错 (不会阻止程序继续执行) (推荐)
 		return false, errors.New("参数只能是 9")
@@ -108,15 +115,15 @@ func fn3_5(a int) (bool, error) {
 }
 
 func main() {
-	fn3_1() // recover 捕获之后不会崩溃，否则程序执行到这里 会崩溃。
+	fn2_1() // recover 捕获之后不会影响后续代码的执行，否则程序执行到这里 会崩溃。
 
-	fmt.Println("10 / 0 ==>", fn3_2(10, 0)) // 0, 失败后 默认的返回值是 0。
+	fmt.Println("10 / 0 ==>", fn2_2(10, 0)) // 0, 失败后 默认的返回值是 0。
 
-	fn3_4() // 读取文件失败，抛出 panic，recover 捕获之后不会崩溃。
+	fn2_4() // 读取文件失败，抛出 panic，recover 捕获之后不会崩溃。
 
 	fmt.Println("----------------分割线---111-----------------")
 
-	status1, err1 := fn3_5(9)
+	status1, err1 := fn2_5(9)
 
 	if err1 != nil {
 		fmt.Println("main err1 ==>", err1)
@@ -130,7 +137,7 @@ func main() {
 		fmt.Println("main recover err ==>", err) // main recover str ==> 参数只能是 9
 	}()
 
-	status2, err2 := fn3_5(2)
+	status2, err2 := fn2_5(2)
 
 	// 如果是 panic 的错误，则 后边的程序不再执行。
 	if err2 != nil {
