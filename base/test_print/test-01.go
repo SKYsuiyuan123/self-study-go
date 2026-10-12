@@ -4,6 +4,15 @@ import "fmt"
 
 // fmt.Print 使用
 
+// 			println				  												fmt.Println
+// 来源	内置函数，无需 import	标准库 fmt 包，			需 import
+// 输出目标	stderr（标准错误）									stdout（标准输出）
+// 用途	调试																	正式输出
+// 格式化能力	很弱															强大（配 Printf）
+// 对结构体/指针	只给粗略信息											调用 String()，可读
+// 返回值	无																		(n int, err error)
+// 稳定性	不保证																官方保证
+
 func printDemo() {
 	fmt.Printf("%s 哇，你好美 \n", "老婆")   // 老婆 哇，你好美
 	fmt.Printf("%d \n", 3)            // 3

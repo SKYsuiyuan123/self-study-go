@@ -45,7 +45,7 @@ func main() {
 		Age:  31,
 	}
 
-	res2 := response2_1[userInfo2_1]{
+	res2 := response2_1[userInfo2_1]{ // 这里要声明 data 具体是什么类型
 		Code:    0,
 		Message: "success",
 		Data:    user1,
