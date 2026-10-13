@@ -9,11 +9,13 @@ import "fmt"
 
 func main() {
 	str1 := 'a'
+	fmt.Printf("str1: %v, type: %T \n", str1, str1) // str1: 97, type: int32
 
-	var str2 byte = 'a' // 只能有一个字符
-	str3 := '中'         // rune 类型，也是只能有一个字符。
+	var str2 byte = 'a'                             // 只能有一个字符
+	fmt.Printf("str2: %v, type: %T \n", str2, str2) // str2: 97, type: uint8
 
-	fmt.Println("str1, str2, str3 ==>", str1, str2, str3) // 97 97 20013
+	str3 := '中'                                     // rune 类型，也是只能有一个字符。
+	fmt.Printf("str3: %v, type: %T \n", str3, str3) // str3: 20013, type: int32
 
 	fmt.Println("----------------分割线---111-----------------")
 

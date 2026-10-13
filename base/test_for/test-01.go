@@ -16,17 +16,38 @@ func main() {
 	str1 := "你好 golang"
 
 	for key, val := range str1 {
-		fmt.Printf("key = %v, val = %c \n", key, val)
-		// key = 0, val = 你
-		// key = 3, val = 好
-		// key = 6, val =
-		// key = 7, val = g
-		// key = 8, val = o
-		// key = 9, val = l
-		// key = 10, val = a
-		// key = 11, val = n
-		// key = 12, val = g
+		fmt.Printf("key: %v, val: %c, type: %T \n", key, val, val)
+		// key: 0, val: 你, type: int32
+		// key: 3, val: 好, type: int32
+		// key: 6, val:  , type: int32
+		// key: 7, val: g, type: int32
+		// key: 8, val: o, type: int32
+		// key: 9, val: l, type: int32
+		// key: 10, val: a, type: int32
+		// key: 11, val: n, type: int32
+		// key: 12, val: g, type: int32
 	}
+
+	fmt.Println("----------------分割线---111-----------------")
+
+	for i := 0; i < len(str1); i++ {
+		fmt.Printf("i: %v, val: %v, type: %T \n", i, str1[i], str1[i])
+		// i: 0, val: 228, type: uint8
+		// i: 1, val: 189, type: uint8
+		// i: 2, val: 160, type: uint8
+		// i: 3, val: 229, type: uint8
+		// i: 4, val: 165, type: uint8
+		// i: 5, val: 189, type: uint8
+		// i: 6, val: 32, type: uint8
+		// i: 7, val: 103, type: uint8
+		// i: 8, val: 111, type: uint8
+		// i: 9, val: 108, type: uint8
+		// i: 10, val: 97, type: uint8
+		// i: 11, val: 110, type: uint8
+		// i: 12, val: 103, type: uint8
+	}
+
+	fmt.Println("----------------分割线---222-----------------")
 
 	// 1.2 遍历字符串
 
@@ -38,6 +59,8 @@ func main() {
 		// byIndex, uniCode ==> 6 36275 足
 	}
 
+	fmt.Println("----------------分割线---333-----------------")
+
 	// 1.3 字符串转成切片 然后遍历 []rune(str)
 
 	for index, uniCode3 := range []rune(str2) {
@@ -47,7 +70,7 @@ func main() {
 		// index, uniCode3 ==> 2 36275 足
 	}
 
-	fmt.Println("----------------分割线---111-----------------")
+	fmt.Println("----------------分割线---444-----------------")
 
 	// 2. 遍历 数组
 
@@ -60,7 +83,7 @@ func main() {
 		// index, item ==> 2 node
 	}
 
-	fmt.Println("----------------分割线---222-----------------")
+	fmt.Println("----------------分割线---555-----------------")
 
 	// 3. 遍历 map
 
